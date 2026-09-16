@@ -81,3 +81,14 @@ test('permanent deletion is limited to confirmed trash and removes its media',as
  await ok(`/api/admin/projects/${p.id}`,{method:'DELETE',body:{version:p.version,confirm:true}});
  assert.equal((await req(`/api/admin/projects/${p.id}`)).status,404);assert.equal((await req(`/media/${m.id}`)).status,404);
 });
+test('YouTube-only projects save, publish, keep edits private, and reject unsupported links',async()=>{
+  let p=await create({title:'Linked film',kind:'Video',url:'',youtubeUrl:'https://youtu.be/M7lc1UVf-VE?si=tracking'});
+  assert.equal(p.youtubeUrl,'https://www.youtube.com/watch?v=M7lc1UVf-VE');
+  assert.equal((await ok('/api/projects',{auth:false})).projects.some(item=>item.id===p.id),false);
+  p=await ok(`/api/admin/projects/${p.id}/publish`,{method:'POST',body:{version:p.version,rightsConfirmed:true}});
+  let published=(await ok('/api/projects',{auth:false})).projects.find(item=>item.id===p.id);assert.equal(published.youtubeUrl,p.youtubeUrl);assert.deepEqual(published.media,[]);
+  p=await ok(`/api/admin/projects/${p.id}`,{method:'PUT',body:{...p,youtubeUrl:'https://www.youtube.com/shorts/abcdefghijk'}});
+  published=(await ok('/api/projects',{auth:false})).projects.find(item=>item.id===p.id);assert.equal(published.youtubeUrl,'https://www.youtube.com/watch?v=M7lc1UVf-VE');
+  assert.equal((await req(`/api/admin/projects/${p.id}`,{method:'PUT',body:{...p,youtubeUrl:'https://youtube.com.evil.test/watch?v=M7lc1UVf-VE'}})).status,400);
+  const page=await req('/admin');assert.match(page.headers.get('content-security-policy'),/frame-src https:\/\/www.youtube-nocookie.com;/);
+});

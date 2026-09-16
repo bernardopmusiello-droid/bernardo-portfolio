@@ -4,7 +4,7 @@ try {
   if(!response.ok)throw new Error('Projects unavailable');
   records=(await response.json()).projects;
 } catch {loadError=true;}
-export const projects=records.map(p=>({...p,type:p.kind,category:p.kind,detail:p.description||p.summary,image:p.coverId?`/media/${p.coverId}`:'',formats:[...new Set((p.media||[]).map(m=>m.mime.startsWith('video/')?'Video':m.mime.startsWith('image/')?'Images':m.mime==='text/vtt'?'Captions':'File'))].join(' · ')||(p.url?'Website link':'Project'),placeholder:false}));
+export const projects=records.map(p=>({...p,type:p.kind,category:p.kind,detail:p.description||p.summary,image:p.coverId?`/media/${p.coverId}`:'',formats:[...new Set([...(p.youtubeUrl?['YouTube video']:[]),...(p.media||[]).map(m=>m.mime.startsWith('video/')?'Video':m.mime.startsWith('image/')?'Images':m.mime==='text/vtt'?'Captions':'File')])].join(' · ')||(p.url?'Website link':'Project'),placeholder:false}));
 export const projectsUnavailable=loadError;
 export function makeIntroduction(pageUrl){
   const context=projects.slice(0,12).map(p=>({title:p.title,category:p.kind,summary:p.summary,role:p.role}));

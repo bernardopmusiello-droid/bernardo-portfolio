@@ -6,6 +6,8 @@ A nature-by-day, space-by-night portfolio for websites, videos, broadcast graphi
 
 Open `/admin` and sign in with the owner’s ChatGPT account. Add a project, save a draft, upload files, preview it, then publish. The portfolio displays only published snapshots. Saving changes to a published project leaves its visible version unchanged until **Publish update** is selected.
 
+- YouTube videos: paste a watch, youtu.be, Shorts or live-video link in the dedicated field. Preview before saving or publishing. No upload or API key is required. Use public/unlisted videos with embedding enabled. YouTube is the primary player when both a link and an uploaded main video are present.
+- YouTube embeds load only after a click, use the privacy-enhanced domain, and stop when the preview closes. A Watch on YouTube link remains available for restricted/unavailable embeds. Manage YouTube captions on YouTube; transcripts work for either source.
 - MP4/WebM videos: up to 1 GiB each, in resumable 8 MiB parts.
 - JPG/PNG/WebP images: up to 20 MiB; PDF: 25 MiB; WebVTT captions: 2 MiB.
 - Up to 30 files per project. Default application storage allowance: 20 GiB including unfinished uploads. This is an application limit, not a provider storage entitlement or price promise.

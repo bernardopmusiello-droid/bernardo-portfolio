@@ -1,8 +1,9 @@
+import {youtubeVideo,youtubeHelp,enableYouTubePlayers,stopProjectMedia} from './youtube.js';
 import {escapeHTML as e,fileSize,projectMedia,projectExtras} from './work-view.js';
 const $=s=>document.querySelector(s), form=$('#editor');
-const fields=['title','kind','year','summary','description','role','url','credits','transcript','imageAlt'];
+const fields=['title','kind','year','summary','description','role','url','youtubeUrl','credits','transcript','imageAlt'];
 let projects=[], current=null, media=[], dirty=false, trashView=false, busy=false, uploads=0, uploadBatch=false;
-const blank=()=>({title:'',kind:'Website',year:new Date().getFullYear(),summary:'',description:'',role:'',url:'',credits:'',transcript:'',imageAlt:'',mediaIds:[],coverId:'',videoId:'',captionsId:''});
+const blank=()=>({title:'',kind:'Website',year:new Date().getFullYear(),summary:'',description:'',role:'',url:'',youtubeUrl:'',credits:'',transcript:'',imageAlt:'',mediaIds:[],coverId:'',videoId:'',captionsId:''});
 function toast(message){$('#toast').textContent=message;$('#toast').hidden=false;clearTimeout(toast.timer);toast.timer=setTimeout(()=>$('#toast').hidden=true,7000);}
 async function api(path,{method='GET',body,raw,signal}={}){
   let response;try{response=await fetch(path,{method,credentials:'same-origin',headers:{...(method!=='GET'?{'x-portfolio-request':'1'}:{}),...(body?{'Content-Type':'application/json'}:{})},body:raw|| (body?JSON.stringify(body):undefined),signal});}catch(error){if(error.name==='AbortError')throw error;throw new Error('Connection interrupted. Your saved work is safe; try again.');}
@@ -21,7 +22,7 @@ function fill(p){current=p;dirty=false;form.hidden=false;$('#blank').hidden=true
   const deleted=Boolean(p.deletedAt);for(const element of form.querySelectorAll('input,textarea,select'))element.disabled=deleted||busy;
   for(const id of ['save-project','publish-project','trash-project'])$('#'+id).hidden=deleted;
   $('#restore-project').hidden=!deleted;$('#delete-project').hidden=!deleted;$('#unpublish-project').hidden=!p.published||deleted;$('#publish-project').textContent=p.published?'Publish update':'Publish';
-  $('#upload-files').disabled=deleted||busy;renderList();renderMedia();
+  $('#upload-files').disabled=deleted||busy;renderList();renderMedia();validateYouTube(false);
 }
 async function confirmAction(title,description,{label='Continue',rights=false}={}){
   $('#confirm-title').textContent=title;$('#confirm-description').textContent=description;$('#confirm-yes').textContent=label;$('#rights-label').hidden=!rights;$('#rights-note').hidden=!rights;$('#rights-confirmed').checked=false;$('#confirm-yes').disabled=rights;
@@ -33,6 +34,7 @@ async function choose(id){if(!await canLeave())return;await run(async()=>{const 
 async function newProject(){if(!await canLeave())return;trashView=false;$('#active-tab').setAttribute('aria-pressed','true');$('#trash-tab').setAttribute('aria-pressed','false');media=[];$('#upload-queue').replaceChildren();fill(blank());form.elements.title.focus();}
 async function loadMedia(){const result=await api(`/api/admin/media${current?.id?'?project='+current.id:''}`);media=current?.id?result.media:[];$('#storage-used').textContent=`${fileSize(result.used)} of ${fileSize(result.limit)} used`;renderMedia();}
 async function save(){
+  if(!validateYouTube(true))throw new Error(youtubeHelp);
   if(!form.elements.title.value.trim())throw new Error('Add a project title first.');
   if(!form.reportValidity())throw new Error('Please complete the highlighted fields.');
   const p=data();const saved=await api(current.id?`/api/admin/projects/${current.id}`:'/api/admin/projects',{method:current.id?'PUT':'POST',body:p});replaceProject(saved);fill(saved);if(!uploads)for(const row of $('#upload-queue').querySelectorAll('.upload-row'))if(!row.querySelector('button'))row.remove();return saved;
@@ -61,8 +63,13 @@ $('#delete-project').onclick=()=>run(async()=>{
   if(!await confirmAction('Permanently delete this project?', 'The project and all its uploaded files will be erased. This cannot be undone. Download a backup first.', {label:'Delete permanently'}))return;
   const id=current.id;await api(`/api/admin/projects/${id}`,{method:'DELETE',body:{version:current.version,confirm:true}});projects=projects.filter(p=>p.id!==id);current=null;media=[];dirty=false;form.hidden=true;$('#blank').hidden=false;renderList();await loadMedia();toast('Project and files removed.');
 });
-$('#preview-project').onclick=()=>{const p=data();$('#preview-content').innerHTML=`${projectMedia(p,media)}<h1>${e(p.title||'Untitled project')}</h1><p class="preview-meta">${e(p.kind)} · ${p.year}${p.role?' · '+e(p.role):''}</p><p>${e(p.summary)}</p><p class="work-prose">${e(p.description)}</p>${projectExtras(p,media)}`;$('#preview-dialog').showModal();};
-$('.close-preview').onclick=()=>$('#preview-dialog').close();$('#preview-dialog').addEventListener('close',()=>{for(const video of $('#preview-dialog').querySelectorAll('video'))video.pause();});
+function showPreview(){if(!validateYouTube(true))return;const p=data();$('#preview-content').innerHTML=`${projectMedia(p,media)}<h1>${e(p.title||'Untitled project')}</h1><p class="preview-meta">${e(p.kind)} · ${p.year}${p.role?' · '+e(p.role):''}</p><p>${e(p.summary)}</p><p class="work-prose">${e(p.description)}</p>${projectExtras(p,media)}`;$('#preview-dialog').showModal();}
+$('#preview-project').onclick=showPreview;
+$('#preview-youtube').onclick=()=>{if(!form.elements.youtubeUrl.value.trim()){toast('Paste a YouTube video link first.');form.elements.youtubeUrl.focus();return;}showPreview();};
+enableYouTubePlayers($('#preview-dialog'));
+function validateYouTube(report){const input=form.elements.youtubeUrl,value=input.value.trim(),valid=!value||Boolean(youtubeVideo(value));input.setCustomValidity(valid?'':youtubeHelp);$('#youtube-status').textContent=value?(valid?'Link ready. Preview it before publishing.':youtubeHelp):'';$('#youtube-status').classList.toggle('invalid',!valid);if(!valid&&report){toast(youtubeHelp);input.reportValidity();}return valid;}
+form.elements.youtubeUrl.addEventListener('input',()=>validateYouTube(false));
+$('.close-preview').onclick=()=>$('#preview-dialog').close();$('#preview-dialog').addEventListener('close',()=>{stopProjectMedia($('#preview-dialog'));});
 function renderMedia(){
   $('#media-empty').hidden=media.length>0;$('#media-empty').textContent=current?.id?'Upload images, a video, or supporting files.':'Save this draft to start uploading.';
   $('#media-grid').innerHTML=media.map(m=>{
