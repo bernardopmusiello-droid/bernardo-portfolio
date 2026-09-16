@@ -1,0 +1,12 @@
+import { build } from 'esbuild';
+import { cp, mkdir, rm, readFile, writeFile } from 'node:fs/promises';
+await rm('dist', { recursive:true, force:true });
+await mkdir('dist/server', {recursive:true});
+await cp('public','dist/client',{recursive:true});
+await build({entryPoints:['server/index.js'], outfile:'dist/server/index.js',bundle:true,format:'esm',platform:'browser',target:'es2022',external:['cloudflare:workers'],minify:false});
+await mkdir('dist/.openai',{recursive:true});
+const config=JSON.parse(await readFile('.openai/hosting.json','utf8').catch(()=>JSON.stringify({d1:'DB',r2:'BUCKET'})));
+await writeFile('dist/.openai/hosting.json',JSON.stringify(config,null,2));
+await cp('drizzle','dist/.openai/drizzle',{recursive:true});
+if(config.static || config.d1!=='DB' || config.r2!=='BUCKET') throw new Error('Server deployment requires DB and BUCKET bindings.');
+console.log('Worker, public assets and migrations built.');

@@ -4,7 +4,7 @@
   "note": "Illustrative raster assets were generated with GPT Image 2.5 through Higgsfield, followed by alpha cleanup, cropping and resizing. Null quality means the earlier generation quality was not recorded. See THIRD_PARTY_NOTICES.md for reuse and attribution.",
   "assets": [
     {
-      "file": "dist/assets/astronaut-run.png",
+      "file": "public/assets/astronaut-run.png",
       "quality": null,
       "dimensions": [
         576,
@@ -12,7 +12,7 @@
       ]
     },
     {
-      "file": "dist/assets/moon.png",
+      "file": "public/assets/moon.png",
       "quality": null,
       "dimensions": [
         256,
@@ -20,7 +20,7 @@
       ]
     },
     {
-      "file": "dist/assets/planet-ringed.png",
+      "file": "public/assets/planet-ringed.png",
       "quality": "max",
       "dimensions": [
         768,
@@ -28,7 +28,7 @@
       ]
     },
     {
-      "file": "dist/assets/planet-blue.png",
+      "file": "public/assets/planet-blue.png",
       "quality": "max",
       "dimensions": [
         512,
@@ -36,7 +36,7 @@
       ]
     },
     {
-      "file": "dist/assets/satellite.png",
+      "file": "public/assets/satellite.png",
       "quality": "max",
       "dimensions": [
         768,
@@ -44,7 +44,7 @@
       ]
     },
     {
-      "file": "dist/assets/preview-website.png",
+      "file": "public/assets/preview-website.png",
       "quality": "max",
       "dimensions": [
         1280,
@@ -52,7 +52,7 @@
       ]
     },
     {
-      "file": "dist/assets/preview-film.png",
+      "file": "public/assets/preview-film.png",
       "quality": "max",
       "dimensions": [
         1280,
@@ -60,7 +60,7 @@
       ]
     },
     {
-      "file": "dist/assets/preview-broadcast.png",
+      "file": "public/assets/preview-broadcast.png",
       "quality": "max",
       "dimensions": [
         1280,
@@ -68,7 +68,7 @@
       ]
     },
     {
-      "file": "dist/assets/preview-product.png",
+      "file": "public/assets/preview-product.png",
       "quality": "max",
       "dimensions": [
         1280,
@@ -76,7 +76,7 @@
       ]
     },
     {
-      "file": "dist/assets/preview-app.png",
+      "file": "public/assets/preview-app.png",
       "quality": "max",
       "dimensions": [
         1280,
@@ -84,7 +84,7 @@
       ]
     },
     {
-      "file": "dist/assets/ai-cloud.png",
+      "file": "public/assets/ai-cloud.png",
       "quality": "max",
       "dimensions": [
         256,
@@ -92,7 +92,7 @@
       ]
     },
     {
-      "file": "dist/assets/galaxy-fine.png",
+      "file": "public/assets/galaxy-fine.png",
       "quality": "max",
       "dimensions": [
         512,
@@ -100,7 +100,7 @@
       ]
     },
     {
-      "file": "dist/assets/galaxy-spiral-fine.png",
+      "file": "public/assets/galaxy-spiral-fine.png",
       "quality": "max",
       "dimensions": [
         512,
@@ -108,7 +108,7 @@
       ]
     },
     {
-      "file": "dist/assets/galaxy-edge-fine.png",
+      "file": "public/assets/galaxy-edge-fine.png",
       "quality": "max",
       "dimensions": [
         768,
@@ -116,7 +116,7 @@
       ]
     },
     {
-      "file": "dist/assets/earth-home.png",
+      "file": "public/assets/earth-home.png",
       "quality": "max",
       "dimensions": [
         512,
@@ -124,7 +124,7 @@
       ]
     },
     {
-      "file": "dist/assets/forest-home.png",
+      "file": "public/assets/forest-home.png",
       "quality": "max",
       "dimensions": [
         768,
@@ -132,7 +132,7 @@
       ]
     },
     {
-      "file": "dist/assets/cloud-home.png",
+      "file": "public/assets/cloud-home.png",
       "quality": "max",
       "dimensions": [
         768,
@@ -140,7 +140,7 @@
       ]
     },
     {
-      "file": "dist/assets/hiker-walk.png",
+      "file": "public/assets/hiker-walk.png",
       "quality": "max",
       "dimensions": [
         576,
@@ -148,7 +148,7 @@
       ]
     },
     {
-      "file": "dist/assets/alpine-lake.png",
+      "file": "public/assets/alpine-lake.png",
       "quality": "max",
       "resolution": "2k",
       "variant": "flare",
@@ -158,7 +158,7 @@
       ]
     },
     {
-      "file": "dist/assets/waterfall.png",
+      "file": "public/assets/waterfall.png",
       "quality": "max",
       "resolution": "2k",
       "variant": "flare",
@@ -168,7 +168,7 @@
       ]
     },
     {
-      "file": "dist/assets/meadow.png",
+      "file": "public/assets/meadow.png",
       "quality": "max",
       "resolution": "2k",
       "variant": "flare",
@@ -178,7 +178,7 @@
       ]
     },
     {
-      "file": "dist/assets/fern.png",
+      "file": "public/assets/fern.png",
       "quality": "max",
       "resolution": "2k",
       "variant": "flare",
@@ -188,7 +188,7 @@
       ]
     },
     {
-      "file": "dist/assets/butterflies.png",
+      "file": "public/assets/butterflies.png",
       "quality": "max",
       "resolution": "2k",
       "variant": "flare",

@@ -2,6 +2,7 @@
 <html lang="en" data-theme="light">
   <head>
     <meta charset="utf-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' blob: data:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="theme-color" content="#ecf1e7" />
     <meta
@@ -152,8 +153,8 @@
             Work <span class="section-note">a few things to come</span>
           </h2>
           <div class="projects" id="projects"></div>
-          <p class="sample-note">
-            Sample projects for now. The real stories will go here.
+          <p class="sample-note" id="work-note">
+            Good things are taking shape. Finished work will appear here soon.
           </p>
         </section>
         <section
@@ -180,8 +181,7 @@
               videos, graphics, and products. A place to collect ideas and see
               where they go.
             </p>
-            <p>Take a look around. There’s a little bit of everything here.</p>
-            <p class="small-note">More of my story will land here soon.</p>
+            <p>I love nature, space, and exploring what I can create. Make yourself at home.</p>
           </div>
         </section>
         <section
@@ -286,7 +286,7 @@
             ><a href="#top" aria-label="Back to top">↑</a>
           </div>
           <div class="footer-credit">
-            <span>© <span id="year">2026</span> Bernardo Musiello</span>
+            <span>© <span id="year">2026</span> Bernardo Musiello</span><nav class="legal-links" aria-label="Site information"><a href="/privacy">Privacy</a><a href="/credits">Credits</a><a href="/admin">Studio</a></nav>
           </div>
         </footer>
       </main>
@@ -388,7 +388,7 @@
         <p id="project-description"></p>
         <dl>
           <div>
-            <dt>Space for</dt>
+            <dt>My role</dt>
             <dd id="project-role"></dd>
           </div>
           <div>
@@ -396,9 +396,7 @@
             <dd id="project-formats"></dd>
           </div>
         </dl>
-        <p class="placeholder-notice">
-          This is a placeholder, ready for a real project.
-        </p>
+        <div id="project-extras"></div>
         <button class="back-button" data-close="project-dialog">
           Back to exploring <span data-icon="arrow-right"></span>
         </button>
@@ -457,6 +455,6 @@
       ></div>
       <p class="search-help">↑ ↓ to explore <span>enter to open</span></p>
     </dialog>
-    <script type="module" src="app.js?v=10"></script>
+    <script type="module" src="app.js?v=11"></script>
   </body>
 </html>

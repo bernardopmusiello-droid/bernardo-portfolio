@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { portalGeometry } from '../dist/theme-portal.js';
+import { portalGeometry } from '../public/theme-portal.js';
 
 function contains(points, x, y) {
   let inside = false;
