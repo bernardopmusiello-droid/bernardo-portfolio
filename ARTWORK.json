@@ -1,0 +1,201 @@
+{
+  "provider": "Higgsfield",
+  "model": "gpt_image_2_5",
+  "note": "Illustrative raster assets were generated with GPT Image 2.5 through Higgsfield, followed by alpha cleanup, cropping and resizing. Null quality means the earlier generation quality was not recorded. See THIRD_PARTY_NOTICES.md for reuse and attribution.",
+  "assets": [
+    {
+      "file": "dist/assets/astronaut-run.png",
+      "quality": null,
+      "dimensions": [
+        576,
+        96
+      ]
+    },
+    {
+      "file": "dist/assets/moon.png",
+      "quality": null,
+      "dimensions": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "dist/assets/planet-ringed.png",
+      "quality": "max",
+      "dimensions": [
+        768,
+        512
+      ]
+    },
+    {
+      "file": "dist/assets/planet-blue.png",
+      "quality": "max",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "file": "dist/assets/satellite.png",
+      "quality": "max",
+      "dimensions": [
+        768,
+        512
+      ]
+    },
+    {
+      "file": "dist/assets/preview-website.png",
+      "quality": "max",
+      "dimensions": [
+        1280,
+        720
+      ]
+    },
+    {
+      "file": "dist/assets/preview-film.png",
+      "quality": "max",
+      "dimensions": [
+        1280,
+        720
+      ]
+    },
+    {
+      "file": "dist/assets/preview-broadcast.png",
+      "quality": "max",
+      "dimensions": [
+        1280,
+        720
+      ]
+    },
+    {
+      "file": "dist/assets/preview-product.png",
+      "quality": "max",
+      "dimensions": [
+        1280,
+        720
+      ]
+    },
+    {
+      "file": "dist/assets/preview-app.png",
+      "quality": "max",
+      "dimensions": [
+        1280,
+        720
+      ]
+    },
+    {
+      "file": "dist/assets/ai-cloud.png",
+      "quality": "max",
+      "dimensions": [
+        256,
+        256
+      ]
+    },
+    {
+      "file": "dist/assets/galaxy-fine.png",
+      "quality": "max",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "file": "dist/assets/galaxy-spiral-fine.png",
+      "quality": "max",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "file": "dist/assets/galaxy-edge-fine.png",
+      "quality": "max",
+      "dimensions": [
+        768,
+        192
+      ]
+    },
+    {
+      "file": "dist/assets/earth-home.png",
+      "quality": "max",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "file": "dist/assets/forest-home.png",
+      "quality": "max",
+      "dimensions": [
+        768,
+        768
+      ]
+    },
+    {
+      "file": "dist/assets/cloud-home.png",
+      "quality": "max",
+      "dimensions": [
+        768,
+        384
+      ]
+    },
+    {
+      "file": "dist/assets/hiker-walk.png",
+      "quality": "max",
+      "dimensions": [
+        576,
+        96
+      ]
+    },
+    {
+      "file": "dist/assets/alpine-lake.png",
+      "quality": "max",
+      "resolution": "2k",
+      "variant": "flare",
+      "dimensions": [
+        768,
+        768
+      ]
+    },
+    {
+      "file": "dist/assets/waterfall.png",
+      "quality": "max",
+      "resolution": "2k",
+      "variant": "flare",
+      "dimensions": [
+        768,
+        768
+      ]
+    },
+    {
+      "file": "dist/assets/meadow.png",
+      "quality": "max",
+      "resolution": "2k",
+      "variant": "flare",
+      "dimensions": [
+        768,
+        512
+      ]
+    },
+    {
+      "file": "dist/assets/fern.png",
+      "quality": "max",
+      "resolution": "2k",
+      "variant": "flare",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "file": "dist/assets/butterflies.png",
+      "quality": "max",
+      "resolution": "2k",
+      "variant": "flare",
+      "dimensions": [
+        512,
+        512
+      ]
+    }
+  ]
+}

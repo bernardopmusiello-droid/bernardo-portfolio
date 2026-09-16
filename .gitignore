@@ -1,0 +1,13 @@
+node_modules/
+.DS_Store
+.env
+.env.*
+!.env.example
+.openai/
+**/.openai/
+work/
+coverage/
+*.log
+*.tar.gz
+*.pem
+*.key

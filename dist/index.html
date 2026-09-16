@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#ecf1e7" />
+    <meta
+      name="description"
+      content="Bernardo Musiello's little corner of the universe. Websites, videos, graphics, products, apps, and whatever comes next."
+    />
+    <title>Bernardo Musiello — A Little Corner of the Universe</title>
+    <link rel="icon" href="assets/favicon.svg" />
+    <link rel="stylesheet" href="fonts.css" />
+    <link rel="stylesheet" href="styles.css?v=7" />
+  </head>
+  <body>
+    <a class="skip-link" href="#work">Skip to work</a>
+    <div class="sky" aria-hidden="true" id="sky"></div>
+    <div class="space-art" aria-hidden="true">
+      <img class="galaxy g1" src="assets/galaxy-fine.png" alt="" /><img
+        class="galaxy g2"
+        src="assets/galaxy-spiral-fine.png"
+        alt=""
+      />
+      <img class="galaxy g3" src="assets/galaxy-edge-fine.png" alt="" /><img
+        class="galaxy g4"
+        src="assets/galaxy-spiral-fine.png"
+        alt=""
+      />
+      <img class="galaxy g5" src="assets/galaxy-fine.png" alt="" /><img
+        class="galaxy g6"
+        src="assets/galaxy-edge-fine.png"
+        alt=""
+      />
+      <img class="galaxy g7" src="assets/galaxy-spiral-fine.png" alt="" />
+      <img
+        class="space-object planet-ringed"
+        src="assets/planet-ringed.png"
+        alt=""
+        width="768"
+        height="512"
+      />
+      <img
+        class="space-object planet-blue"
+        src="assets/planet-blue.png"
+        alt=""
+        width="512"
+        height="512"
+      />
+      <img
+        class="space-object roaming-satellite"
+        src="assets/satellite.png"
+        alt=""
+        width="768"
+        height="512"
+      />
+    </div>
+    <div class="nature-art day-only" aria-hidden="true">
+      <img class="nature-cloud cloud-one" src="assets/cloud-home.png" alt="" width="768" height="384" />
+      <img class="nature-detail butterflies-one" src="assets/butterflies.png" alt="" width="512" height="512" />
+      <img class="nature-forest forest-one" src="assets/alpine-lake.png" alt="" width="768" height="768" />
+      <img class="nature-detail fern-one" src="assets/fern.png" alt="" width="512" height="512" />
+      <img class="nature-forest forest-two" src="assets/waterfall.png" alt="" width="768" height="768" />
+      <img class="nature-detail meadow-one" src="assets/meadow.png" alt="" width="768" height="512" />
+      <img class="nature-forest forest-three" src="assets/forest-home.png" alt="" width="768" height="768" />
+    </div>
+    <div class="frame-gutter left" aria-hidden="true"></div>
+    <div class="frame-gutter right" aria-hidden="true"></div>
+    <header class="site-header">
+      <a
+        class="home-control glass"
+        href="#top"
+        aria-label="Bernardo Musiello, home"
+        >b<span>.</span></a
+      >
+      <div class="header-actions glass">
+        <button
+          id="search-trigger"
+          class="search-trigger"
+          aria-label="Search the portfolio"
+          aria-haspopup="dialog"
+        >
+          <span data-icon="search"></span><kbd>⌘ K</kbd>
+        </button>
+        <a
+          href="https://github.com/bernardopmusiello-droid/bernardo-portfolio"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="icon-button source-link"
+          aria-label="View Bernardo Musiello’s portfolio source on GitHub"
+          title="Open-source portfolio on GitHub"
+          ><span data-icon="github"></span
+        ></a>
+        <button
+          id="theme-toggle"
+          class="icon-button"
+          aria-label="Switch to dark theme, a little farther into space"
+          title="Switch theme · D"
+        >
+          <span data-icon="moon"></span>
+        </button>
+      </div>
+      <span id="theme-invitation" class="theme-invitation" aria-hidden="true">
+        <span>try this</span>
+        <svg viewBox="0 0 58 38" fill="none"><path d="M3 32C26 36 45 25 48 5M40 11L48 4L54 13" /></svg>
+      </span>
+    </header>
+    <div class="frame" id="top">
+      <main>
+        <section class="hero" aria-labelledby="intro-title">
+          <div class="greeting">
+            Hey, I'm Bernardo
+            <span class="wave" aria-hidden="true" data-icon="wave"></span>
+          </div>
+          <h1 id="intro-title">
+            <span class="intro-line">I make</span
+            ><span class="underlined">websites</span>,
+            <span class="underlined">videos</span>, and things I'm curious
+            about.
+          </h1>
+          <p class="hero-description">
+            Graphics, products, apps, and whatever comes next.<br />Welcome to
+            <span id="welcome-world">my little corner of the universe.</span>
+          </p>
+          <div class="location">
+            <span class="earth" aria-hidden="true"
+              ><img
+                src="assets/planet-blue.png"
+                alt=""
+                width="18"
+                height="18" /></span
+            ><span>Somewhere on Earth</span
+            ><span class="location-separator">/</span
+            ><span class="status-dot"></span
+            ><span class="status-text">Still exploring</span>
+          </div>
+        </section>
+        <section class="section" id="socials" aria-labelledby="socials-title">
+          <h2 class="section-heading" id="socials-title">Socials</h2>
+          <div class="tile-grid" id="social-grid"></div>
+        </section>
+        <section
+          class="section work-section"
+          id="work"
+          aria-labelledby="work-title"
+        >
+          <h2 class="section-heading" id="work-title">
+            Work <span class="section-note">a few things to come</span>
+          </h2>
+          <div class="projects" id="projects"></div>
+          <p class="sample-note">
+            Sample projects for now. The real stories will go here.
+          </p>
+        </section>
+        <section
+          class="section"
+          id="playground"
+          aria-labelledby="playground-title"
+        >
+          <h2 class="section-heading" id="playground-title">Playground</h2>
+          <div class="tile-grid experiment-grid" id="experiment-grid"></div>
+          <a class="view-all" href="#work"
+            >Explore all the work <span data-icon="arrow-right"></span
+          ></a>
+        </section>
+        <section class="section" id="about" aria-labelledby="about-title">
+          <h2 class="section-heading" id="about-title">About</h2>
+          <div class="about-copy">
+            <p>
+              I like the space between
+              <span class="bright">“what if?”</span> and
+              <span class="bright">“here it is.”</span>
+            </p>
+            <p>
+              This is a home for the things I make, from websites and apps to
+              videos, graphics, and products. A place to collect ideas and see
+              where they go.
+            </p>
+            <p>Take a look around. There’s a little bit of everything here.</p>
+            <p class="small-note">More of my story will land here soon.</p>
+          </div>
+        </section>
+        <section
+          class="section bookmarks-section"
+          id="bookmarks"
+          aria-labelledby="bookmarks-title"
+        >
+          <h2 class="section-heading" id="bookmarks-title">Bookmarks</h2>
+          <div class="tile-grid bookmark-grid" id="bookmark-grid"></div>
+        </section>
+        <footer id="footer" class="site-footer">
+          <div class="footer-copy">
+            <blockquote class="night-only">
+              “Don't tell me the sky is the limit when there are footsteps on
+              the moon.”
+            </blockquote>
+            <blockquote class="day-only nature-quote">
+              “Nature does not hurry, yet everything is accomplished.”
+              <cite>– Lao Tzu</cite>
+            </blockquote>
+            <p class="footer-sentiment">
+              <span class="night-only">Made with curiosity, and a little stardust.</span>
+              <span class="day-only">A little wonder. A place to call home.</span>
+            </p>
+          </div>
+          <div class="moon-landscape">
+            <div class="footer-space-art night-only" aria-hidden="true">
+              <img
+                class="footer-planet"
+                src="assets/planet-ringed.png"
+                alt=""
+                width="768"
+                height="512"
+                loading="lazy"
+              />
+              <img
+                class="footer-blue-planet"
+                src="assets/planet-blue.png"
+                alt=""
+                width="512"
+                height="512"
+                loading="lazy"
+              />
+              <img
+                class="footer-satellite"
+                src="assets/satellite.png"
+                alt=""
+                width="768"
+                height="512"
+                loading="lazy"
+              />
+            </div>
+            <div class="landscape-stars night-only" aria-hidden="true">
+              <span>✦</span><span>·</span><span>✧</span><span>+</span
+              ><span>·</span><span>✦</span>
+            </div>
+            <div
+              id="moon-scene"
+              class="moon-scene night-only"
+              role="img"
+              aria-label="A little pixel astronaut bounding on a rotating moon, with a planted step and a gentle low-gravity jump."
+            >
+              <div class="moon-rim">
+                <img
+                  id="moon-texture"
+                  src="assets/moon.png"
+                  alt=""
+                  width="116"
+                  height="116"
+                />
+              </div>
+              <div id="astronaut" class="astronaut"></div>
+              <div id="foot-shadow" class="foot-shadow"></div>
+            </div>
+            <div class="footer-nature-art day-only" aria-hidden="true">
+              <img class="footer-cloud cloud-left" src="assets/cloud-home.png" alt="" width="768" height="384" />
+              <img class="footer-butterflies" src="assets/butterflies.png" alt="" width="512" height="512" />
+              <img class="footer-forest grove-left" src="assets/meadow.png" alt="" width="768" height="512" />
+              <img class="footer-forest grove-right" src="assets/fern.png" alt="" width="512" height="512" />
+            </div>
+            <div id="earth-scene" class="earth-scene day-only" role="img" aria-label="A pixel hiker with a backpack walking on a little Earth, with blue oceans, familiar continents, and oversized forests and mountains.">
+              <div class="earth-halo" aria-hidden="true"></div>
+              <img id="home-earth" src="assets/earth-home.png" alt="" width="512" height="512" />
+              <div id="hiker" class="hiker" aria-hidden="true"></div>
+              <div id="hiker-shadow" class="hiker-shadow" aria-hidden="true"></div>
+              <span class="earth-caption" aria-hidden="true">our little home</span>
+            </div>
+            <button
+              id="motion-toggle"
+              class="motion-toggle"
+              aria-pressed="false"
+              aria-label="Pause animations"
+            >
+              <span data-icon="pause"></span
+              ><span class="motion-label">pause the universe</span>
+            </button>
+          </div>
+          <div class="footer-line">
+            <span>Thanks for stopping by.</span
+            ><a href="#top" aria-label="Back to top">↑</a>
+          </div>
+          <div class="footer-credit">
+            <span>© <span id="year">2026</span> Bernardo Musiello</span>
+          </div>
+        </footer>
+      </main>
+    </div>
+    <nav
+      id="section-rail"
+      class="section-rail"
+      aria-label="Jump to section"
+    ></nav>
+    <div class="bottom-atmosphere" aria-hidden="true">
+      <div class="blur-layers" id="blur-layers"></div>
+      <div class="pixel-dissolve"></div>
+    </div>
+    <div class="ai-dock">
+      <div class="ai-widget">
+        <div
+          id="ai-panel"
+          class="ai-panel glass"
+          role="dialog"
+          aria-labelledby="ai-title"
+          aria-describedby="ai-description"
+          hidden
+        >
+          <div class="ai-heading">
+            <div>
+              <h2 id="ai-title">A different way to get to know me</h2>
+              <p id="ai-description">
+                Let your favorite AI show you around my little corner of the
+                universe.
+              </p>
+            </div>
+            <button
+              class="panel-close"
+              id="ai-close"
+              aria-label="Close AI menu"
+            >
+              <span data-icon="x"></span>
+            </button>
+          </div>
+          <div class="providers" id="providers"></div>
+          <button class="copy-prompt" id="copy-prompt">
+            <span data-icon="copy"></span
+            ><span id="copy-label">Copy the prompt instead</span>
+          </button>
+          <details class="prompt-details" id="prompt-details">
+            <summary>Read the prompt</summary>
+            <textarea
+              id="ai-prompt"
+              aria-label="Portfolio introduction prompt"
+              readonly
+            ></textarea>
+          </details>
+          <div id="copy-status" class="sr-only" role="status"></div>
+        </div>
+        <button
+          id="ai-trigger"
+          class="ai-trigger glass"
+          aria-label="Ask an AI about Bernardo"
+          aria-controls="ai-panel"
+          aria-expanded="false"
+          aria-haspopup="dialog"
+        >
+          <span class="ask-tooltip">Ask an AI about me</span
+          ><img
+            class="bit bit-body"
+            src="assets/ai-cloud.png"
+            width="40"
+            height="40"
+            alt=""
+            aria-hidden="true"
+          />
+        </button>
+      </div>
+    </div>
+    <div
+      class="hover-preview"
+      id="hover-preview"
+      aria-hidden="true"
+      hidden
+    ></div>
+    <dialog
+      id="project-dialog"
+      class="project-dialog"
+      aria-labelledby="project-title"
+    >
+      <div class="modal-head">
+        <span id="project-kicker" class="mono"></span
+        ><button
+          class="close-button"
+          aria-label="Close project"
+          data-close="project-dialog"
+        >
+          <span data-icon="x"></span>
+        </button>
+      </div>
+      <div id="project-art"></div>
+      <div class="project-body">
+        <h2 id="project-title"></h2>
+        <p id="project-description"></p>
+        <dl>
+          <div>
+            <dt>Space for</dt>
+            <dd id="project-role"></dd>
+          </div>
+          <div>
+            <dt>Media</dt>
+            <dd id="project-formats"></dd>
+          </div>
+        </dl>
+        <p class="placeholder-notice">
+          This is a placeholder, ready for a real project.
+        </p>
+        <button class="back-button" data-close="project-dialog">
+          Back to exploring <span data-icon="arrow-right"></span>
+        </button>
+      </div>
+    </dialog>
+    <dialog id="info-dialog" class="info-dialog" aria-labelledby="info-title">
+      <div class="modal-head">
+        <span class="mono">A LITTLE SPACE RESERVED</span
+        ><button
+          class="close-button"
+          aria-label="Close details"
+          data-close="info-dialog"
+        >
+          <span data-icon="x"></span>
+        </button>
+      </div>
+      <div class="info-body">
+        <h2 id="info-title"></h2>
+        <p id="info-description"></p>
+        <button class="back-button" data-close="info-dialog">
+          Got it <span data-icon="arrow-right"></span>
+        </button>
+      </div>
+    </dialog>
+    <dialog
+      id="search-dialog"
+      class="search-dialog"
+      aria-labelledby="search-title"
+    >
+      <div class="search-head">
+        <span data-icon="search"></span
+        ><label class="sr-only" id="search-title" for="search-input"
+          >Search this portfolio</label
+        ><input
+          id="search-input"
+          type="search"
+          role="combobox"
+          aria-expanded="true"
+          aria-controls="search-results"
+          aria-autocomplete="list"
+          placeholder="Where would you like to go?"
+          autocomplete="off"
+        /><button
+          class="close-button"
+          aria-label="Close search"
+          data-close="search-dialog"
+        >
+          <kbd>esc</kbd>
+        </button>
+      </div>
+      <div
+        id="search-results"
+        class="search-results"
+        role="listbox"
+        aria-label="Portfolio destinations"
+      ></div>
+      <p class="search-help">↑ ↓ to explore <span>enter to open</span></p>
+    </dialog>
+    <script type="module" src="app.js?v=8"></script>
+  </body>
+</html>
