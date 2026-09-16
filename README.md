@@ -10,6 +10,7 @@ A welcoming pixel-art portfolio that opens on Earth and travels into space. Buil
 - Nature-first daylight theme: alpine lake, waterfalls, wildflowers, ferns, butterflies and a hiker on Earth.
 - Space theme with galaxies, planets and a little astronaut on the Moon.
 - A glowing pixel portal in both directions, with a gentle dissolve for reduced motion.
+- Clickable nature clouds with gentle pixel rain. Click again to stop; motion preferences get a still illustration.
 - Cursor-reactive artwork, keyboard navigation, project previews and responsive layouts.
 - An “Ask an AI about me” launcher for ChatGPT, Claude, Grok and Perplexity. It prepares a prompt; it does not submit one or call an AI API.
 - Self-hosted fonts, generated artwork and numerical tests for character motion and portal geometry.
@@ -45,6 +46,7 @@ npm test
 | Moon animation | `dist/motion.js` |
 | Hiking animation and terrain profile | `dist/earth-motion.js`, `dist/earth-profile.js` |
 | Cursor interactions | `dist/interactions.js` |
+| Cloud rain Easter egg | `dist/rain.js` |
 | Artwork and font files | `dist/assets/` |
 
 `dist/` is the editable source and the complete deployable website, despite its name. Keep project examples marked as placeholders until you replace them with real work. Update the name, GitHub links and `makeIntroduction()` when creating your own portfolio. Preserve the included license notices.
