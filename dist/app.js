@@ -1,4 +1,4 @@
-import { projects, makeIntroduction } from "./projects.js?v=3";
+import { projects, makeIntroduction } from "./projects.js?v=8";
 import { initMoonScene } from "./motion.js";
 import { initCursorUniverse } from "./interactions.js?v=6";
 import { initEarthScene } from "./earth-motion.js?v=6";
