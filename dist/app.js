@@ -1,4 +1,4 @@
-import { projects, makeIntroduction } from "./projects.js?v=8";
+import { projects, makeIntroduction } from "./projects.js?v=10";
 import { initMoonScene } from "./motion.js";
 import { initCursorUniverse } from "./interactions.js?v=9";
 import { initEarthScene } from "./earth-motion.js?v=6";
@@ -82,25 +82,25 @@ for (let i = 0; i < 8; i++) {
   $("#blur-layers").append(layer);
 }
 const socialNames = [
-  ["GitHub", "github", "https://github.com/bernardopmusiello-droid"],
-  ["Instagram", "instagram"],
-  ["YouTube", "youtube"],
-  ["LinkedIn", "linkedin"],
-  ["Email", "mail"],
-  ["Discord", "discord"],
+  ["GitHub", "github", "https://github.com/bernardopmusiello-droid", "@bernardopmusiello-droid"],
+  ["Instagram", "instagram", "https://www.instagram.com/bernie_raidervision/", "@bernie_raidervision"],
+  ["LinkedIn", "linkedin", "https://www.linkedin.com/in/bernardo-musiello-425a32361/", "Bernardo Musiello"],
+  ["Email", "mail", "mailto:bernardomusiello@gmail.com", "bernardomusiello@gmail.com"],
 ];
 function tile(title, caption, ico, attrs = "", href = null) {
   const tag = href ? "a" : "button";
-  const destination = href ? `href="${escape(href)}" target="_blank" rel="noopener noreferrer"` : "";
+  const destination = href
+    ? `href="${escape(href)}"${href.startsWith("mailto:") ? "" : ' target="_blank" rel="noopener noreferrer"'}`
+    : "";
   return `<${tag} class="tile" ${destination} ${attrs}><span class="tile-icon">${icon(ico)}</span><span class="tile-text"><span class="tile-title">${escape(title)}</span><span class="tile-caption">${escape(caption)}</span></span><span class="tile-arrow">${icon("arrow-right")}</span></${tag}>`;
 }
 $("#social-grid").innerHTML = socialNames
-  .map(([name, ico, href]) =>
+  .map(([name, ico, href, caption]) =>
     tile(
       name,
-      href ? "@bernardopmusiello-droid" : "profile coming soon",
+      caption,
       ico,
-      href ? `aria-label="Bernardo Musiello on ${name}"` : `data-social="${name}" aria-label="${name}, placeholder profile"`,
+      `aria-label="${name === "Email" ? "Email Bernardo Musiello" : `Bernardo Musiello on ${name}`}"`,
       href,
     ),
   )
@@ -208,16 +208,6 @@ document
   .querySelectorAll("[data-project]")
   .forEach((button) =>
     button.addEventListener("click", () => openProject(button.dataset.project)),
-  );
-document
-  .querySelectorAll("[data-social]")
-  .forEach((button) =>
-    button.addEventListener("click", () =>
-      openInfo(
-        button.dataset.social + " is coming soon",
-        `This space is reserved for Bernardo’s ${button.dataset.social === "Email" ? "email address" : button.dataset.social + " profile"}. The real link will be added here.`,
-      ),
-    ),
   );
 document
   .querySelectorAll("[data-bookmark]")

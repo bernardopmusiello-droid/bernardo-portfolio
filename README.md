@@ -15,7 +15,7 @@ A welcoming pixel-art portfolio that opens on Earth and travels into space. Buil
 - An “Ask an AI about me” launcher for ChatGPT, Claude, Grok and Perplexity. It prepares a prompt; it does not submit one or call an AI API.
 - Self-hosted fonts, generated artwork and numerical tests for character motion and portal geometry.
 
-The project cards are **illustrative placeholders**, not a record of completed client work. GitHub links are real; the other social/contact destinations are placeholders.
+The project cards are **illustrative placeholders**, not a record of completed client work. GitHub, Instagram, LinkedIn and email links are real contact destinations.
 
 ## Run locally
 
