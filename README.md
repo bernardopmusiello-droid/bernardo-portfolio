@@ -1,70 +1,78 @@
-# Bernardo’s little corner of the world
+# Bernardo’s portfolio
 
-A welcoming pixel-art portfolio that opens on Earth and travels into space. Built with plain HTML, CSS and JavaScript. No framework, build step, API key or runtime dependencies.
+A nature-by-day, space-by-night portfolio for websites, videos, broadcast graphics, products and apps. The private studio manages real projects and media without rebuilding the website.
 
-[![Checks](https://github.com/bernardopmusiello-droid/bernardo-portfolio/actions/workflows/checks.yml/badge.svg)](https://github.com/bernardopmusiello-droid/bernardo-portfolio/actions/workflows/checks.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+## Use the studio
 
-## What’s inside
+Open `/admin` and sign in with the owner’s ChatGPT account. Add a project, save a draft, upload files, preview it, then publish. The portfolio displays only published snapshots. Saving changes to a published project leaves its visible version unchanged until **Publish update** is selected.
 
-- Nature-first daylight theme: alpine lake, waterfalls, wildflowers, ferns, butterflies and a hiker on Earth.
-- Space theme with galaxies, planets and a little astronaut on the Moon.
-- A glowing pixel portal in both directions, with a gentle dissolve for reduced motion.
-- Clickable nature clouds with gentle pixel rain. Click again to stop; motion preferences get a still illustration.
-- Cursor-reactive artwork, keyboard navigation, project previews and responsive layouts.
-- An “Ask an AI about me” launcher for ChatGPT, Claude, Grok and Perplexity. It prepares a prompt; it does not submit one or call an AI API.
-- Self-hosted fonts, generated artwork and numerical tests for character motion and portal geometry.
+- MP4/WebM videos: up to 1 GiB each, in resumable 8 MiB parts.
+- JPG/PNG/WebP images: up to 20 MiB; PDF: 25 MiB; WebVTT captions: 2 MiB.
+- Up to 30 files per project. Default application storage allowance: 20 GiB including unfinished uploads. This is an application limit, not a provider storage entitlement or price promise.
+- After a reload, choose the same file to resume. Saved chunks are verified by SHA-256 before continuing.
+- Select a main video, cover and captions. Add a transcript and cover description for accessibility.
+- Unpublish hides the project and revokes ordinary access to its files. Trash is reversible and keeps files private. From trash, **Delete permanently** removes the project and its files after confirmation.
+- Detach a file, save, and remove it from any published version before permanently deleting it.
+- Export the project metadata backup, and download original files separately. The JSON export does **not** contain media bytes. Keep originals and permissions in a separate backup; there is no automatic off-site backup or restore import yet.
 
-The project cards are **illustrative placeholders**, not a record of completed client work. GitHub, Instagram, LinkedIn and email links are real contact destinations.
+The site’s audience setting and project publication are distinct: a published project is visible only to the audience allowed into the site. Changing the site to public does not grant access to the studio or unpublished files.
 
-## Run locally
+## Local development
 
-Install [Node.js 22 or newer](https://nodejs.org/), then:
+Requires Node 22 or newer.
 
 ```sh
-git clone https://github.com/bernardopmusiello-droid/bernardo-portfolio.git
-cd bernardo-portfolio
+npm ci
 npm run dev
 ```
 
-Open http://127.0.0.1:4317. No `npm install` is needed. To use a different port, set the `PORT` environment variable before running the command. The preview server binds to your computer’s loopback address.
+Open `http://127.0.0.1:4320`. The local `/admin` login is a clearly labeled development simulation, stored in a temporary HttpOnly cookie. It is implemented only in `scripts/dev.mjs`, never in the deployed Worker. The preview binds to loopback, rejects other Host headers, and strips incoming identity headers. Test content persists under ignored `.local-state/`.
 
 ```sh
 npm run check
 npm test
+npm run build
 ```
 
-## Make it yours
+Tests exercise real local D1/R2 bindings, unauthorized access, cross-origin requests, draft/published separation, multipart recovery, file validation, quotas and video ranges, plus the portfolio’s animation geometry.
 
-| Change | File |
-| --- | --- |
-| Name, introduction, About, footer quotes, header source link | `dist/index.html` |
-| Project titles, descriptions, images and prepared AI context | `dist/projects.js` |
-| Social links, bookmarks, icons and UI behavior | `dist/app.js` |
-| Colors, layout and responsive styles | `dist/styles.css` |
-| Theme portal | `dist/theme-portal.js` |
-| Moon animation | `dist/motion.js` |
-| Hiking animation and terrain profile | `dist/earth-motion.js`, `dist/earth-profile.js` |
-| Cursor interactions | `dist/interactions.js` |
-| Cloud rain Easter egg | `dist/rain.js` |
-| Artwork and font files | `dist/assets/` |
+## Source layout
 
-`dist/` is the editable source and the complete deployable website, despite its name. Keep project examples marked as placeholders until you replace them with real work. Update the name, GitHub links and `makeIntroduction()` when creating your own portfolio. Preserve the included license notices.
+- `public/` — authored portfolio, studio and artwork. Edit here.
+- `server/` — Cloudflare Worker routes, authorization, validation and media streaming.
+- `db/schema.ts` — database schema.
+- `drizzle/` — generated SQL migrations and metadata; preserve applied history.
+- `scripts/` — build, checks and the local development dispatcher.
+- `tests/` — behavior and motion tests.
+- `dist/` — generated deployment output; do not edit or commit.
 
-## Deploy
+Uploaded media and project records live in D1/R2, not Git. Do not add private projects, videos, identity configuration, credentials, local database state or environment files to this public repository.
 
-Upload the contents of `dist/` to any static web host. There is no build command. Set the publish directory to `dist` when your host asks for it. All asset paths are relative, so the site can also live under a repository subpath. See [deployment notes](docs/DEPLOYMENT.md).
+## Hosting and authentication
 
-This repository does not contain the owner’s private hosting configuration or credentials. Publishing this repository does not change access to an existing hosted preview.
+This application is designed for **OpenAI Sites** with its trusted authentication dispatcher. `.openai/hosting.json` declares logical `DB` (D1) and `BUCKET` (R2) bindings. It is private deployment configuration and is excluded from this public repository. The build emits `dist/server/index.js`, `dist/client/`, and migrations under `dist/.openai/`.
 
-## Accessibility and motion
+1. Configure a Sites project with D1 `DB` and R2 `BUCKET` and copy the project’s exact ID into the private hosting manifest.
+2. Deploy first with `PORTFOLIO_OWNER_ID` unset. Admin access fails closed.
+3. While the site is owner-private, sign in as its verified owner and inspect `/api/session` to obtain that site’s forwarded user ID.
+4. Store that ID as the **server-side** `PORTFOLIO_OWNER_ID` environment value in Sites; deploy again to apply it. Do not use an email address, expose the value in browser configuration, or let the first visitor claim ownership.
+5. Optionally set `PORTFOLIO_STORAGE_LIMIT_BYTES`. Keep the R2 bucket private. Its contents must be served through the Worker’s `/media/:id` checks.
+6. Verify owner login and unauthorized requests before changing the site’s audience.
 
-The page opens in nature mode on every visit. Use the theme button or **D** to switch worlds, **⌘/Ctrl K** to search, and **Escape** to close dialogs. The footer button pauses ambient animation. Operating-system reduced motion selects a short dissolve; browsers without View Transitions switch themes directly. Touch devices keep ordinary scrolling and taps.
+**Do not expose this Worker directly on an independent origin.** The `oai-authenticated-user-*` headers are trustworthy only when a provider strips visitor-supplied values and injects a verified identity. A standalone Cloudflare/Vercel/custom deployment needs a real authentication adapter that cryptographically verifies its session before supplying identity; simply copying these header names is unsafe.
 
-## Contributing
+The platform manages sign-in and sign-out. The app does not keep passwords. Protect the owner’s ChatGPT account with its available account security settings. No assumption is made that MFA is enabled.
 
-Small fixes, accessibility improvements and thoughtful experiments are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md), [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) and [SECURITY.md](SECURITY.md). GitHub Actions runs the same checks used locally for pushes and pull requests.
+After changing the schema, run `npm run db:generate` and commit SQL plus metadata. Sites applies migrations before publishing the Worker. Never rewrite an applied migration, including one applied during a failed release.
 
-## License and credits
+## Security and privacy
 
-The project code and Bernardo’s contributions are available under the [MIT License](LICENSE). The layout adapts [Aditya Ojha’s portfolio](https://github.com/AdityaKodez/adityaojha); its original MIT notice is retained in [dist/REFERENCE-LICENSE.txt](dist/REFERENCE-LICENSE.txt). Font and icon licenses, provider marks, artwork reuse terms and generation details are documented in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) and [ARTWORK.json](ARTWORK.json).
+Owner allowlisting, same-origin mutation checks, prepared SQL, optimistic versions, private draft media, content size/type/signature checks, secure response headers and a studio frame policy are implemented. Video responses support byte ranges and avoid loading entire originals into Worker memory. Publication requires a rights confirmation.
+
+This is not a malware scanning, video transcoding or copyright clearance service. File signatures are format checks, not complete file parsers. MP4/H.264/AAC and WebM are the intended browser-playable formats; unsupported codecs need re-exporting. Keep originals. Captions currently use an English track label.
+
+See [SECURITY.md](SECURITY.md), `/privacy`, `/credits`, [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) and [ARTWORK.json](ARTWORK.json). Adapt notices to your own identity, providers and actual data practices when reusing this code. No claim of universal legal compliance is made.
+
+## License
+
+Website source code is MIT-licensed. The MIT license does not automatically apply to projects uploaded through the studio. AI artwork provenance and third-party font, icon and reference licenses are recorded separately. Preserve required notices when redistributing.

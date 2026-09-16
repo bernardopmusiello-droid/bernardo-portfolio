@@ -1,4 +1,5 @@
-import { projects, makeIntroduction } from "./projects.js?v=10";
+import { projects, projectsUnavailable, makeIntroduction } from "./projects.js?v=11";
+import { projectMedia, projectExtras } from "./work-view.js";
 import { initMoonScene } from "./motion.js";
 import { initCursorUniverse } from "./interactions.js?v=9";
 import { initEarthScene } from "./earth-motion.js?v=6";
@@ -105,56 +106,17 @@ $("#social-grid").innerHTML = socialNames
     ),
   )
   .join("");
-const experiments = [
-  ["Motion studies", "A place for moving ideas.", "film", "film"],
-  [
-    "On the screen",
-    "Graphics with a little character.",
-    "broadcast",
-    "broadcast",
-  ],
-  ["Small experiments", "Something useful. Something new.", "code", "app"],
-  ["Off the screen", "Ideas you can hold.", "box", "product"],
-];
-$("#experiment-grid").innerHTML = experiments
-  .map(([title, caption, ico, id]) =>
-    tile(
-      title,
-      caption,
-      ico,
-      `data-project="${id}" aria-label="${title}, placeholder project"`,
-    ),
-  )
-  .join("");
-const bookmarks = [
-  ["A favorite website", "A LITTLE INSPIRATION", "globe"],
-  ["A useful tool", "PART OF THE PROCESS", "code"],
-  ["Something worth watching", "SAVE FOR LATER", "film"],
-  ["An interesting idea", "FOLLOW THE CURIOSITY", "bookmark"],
-];
-$("#bookmark-grid").innerHTML = bookmarks
-  .map(([title, caption, ico]) =>
-    tile(
-      title,
-      caption,
-      ico,
-      `data-bookmark="${title}" aria-label="${title}, placeholder bookmark"`,
-    ),
-  )
-  .join("");
+// Empty collections stay hidden until they contain real work.
+$('#playground').hidden = true;
+$('#bookmarks').hidden = true;
 function projectRow(p) {
-  return `<li><button class="project-row" data-project="${p.id}" aria-label="Preview ${escape(p.type)} placeholder: ${escape(p.title)}"><span class="project-name"><span class="project-main-name">${escape(p.type)}</span><span class="project-subtitle">${escape(p.title)}</span></span><span class="sample-badge">sample</span><span class="project-type">// ${escape(p.type.toLowerCase())}</span><span class="tile-arrow">${icon("arrow-right")}</span></button></li>`;
+  return `<li><button class="project-row" data-project="${p.id}" aria-label="Preview ${escape(p.title)}"><span class="project-name"><span class="project-main-name">${escape(p.type)}</span><span class="project-subtitle">${escape(p.title)}</span></span><span class="project-type">// ${escape(p.type.toLowerCase())}</span><span class="tile-arrow">${icon("arrow-right")}</span></button></li>`;
 }
-// Draft folder dates are presentation placeholders, not dates of completed work.
-$("#projects").innerHTML = [
-  ["2026", projects.slice(0, 3)],
-  ["2025", projects.slice(3)],
-]
-  .map(
-    ([year, items]) =>
-      `<div class="year-group"><button class="year-heading" aria-expanded="true" aria-controls="projects-${year}" aria-label="${year} sample projects">${icon("folder")}<span>${year}</span><span class="chevron">${icon("chevron")}</span></button><ul class="year-list" id="projects-${year}">${items.map(projectRow).join("")}</ul></div>`,
-  )
-  .join("");
+const years = [...new Set(projects.map(p=>p.year))].sort((a,b)=>b-a);
+$("#projects").innerHTML=years.map(year=>`<div class="year-group"><button class="year-heading" aria-expanded="true" aria-controls="projects-${year}">${icon("folder")}<span>${year}</span><span class="chevron">${icon("chevron")}</span></button><ul class="year-list" id="projects-${year}">${projects.filter(p=>p.year===year).map(projectRow).join('')}</ul></div>`).join('');
+$('#work-note').textContent=projectsUnavailable?'The work could not load. Please refresh to try again.':projects.length?'':'Good things are taking shape. Finished work will appear here soon.';
+$('#work-note').hidden=Boolean(projects.length);
+$('#work .section-note').textContent=projects.length?'a few things I’ve made':'a few things to come';
 document.querySelectorAll(".year-heading").forEach((button) =>
   button.addEventListener("click", () => {
     const expanded = button.getAttribute("aria-expanded") === "true";
@@ -169,7 +131,7 @@ const previewCache = [];
 const previewObserver = new IntersectionObserver(
   (entries) => {
     if (!entries.some((entry) => entry.isIntersecting)) return;
-    for (const project of projects) {
+    for (const project of projects.filter(p=>p.image)) {
       const image = new Image();
       image.decoding = "async";
       image.src = project.image;
@@ -185,16 +147,18 @@ function visual(p) {
   return `<div class="project-visual generated-preview"><img src="${escape(p.image)}" alt="${escape(p.imageAlt)}" width="1280" height="720" decoding="async" /></div>`;
 }
 const projectDialog = $("#project-dialog");
+projectDialog.addEventListener("close",()=>{for(const video of projectDialog.querySelectorAll("video"))video.pause();});
 function openProject(id) {
   const p = projects.find((p) => p.id === id);
   if (!p) return;
   hidePreview();
   closeAI(false);
-  $("#project-kicker").textContent = p.type + " / Placeholder";
-  $("#project-art").innerHTML = visual(p);
+  $("#project-kicker").textContent = p.type + " / " + p.year;
+  $("#project-art").innerHTML = projectMedia(p);
+  $("#project-extras").innerHTML = projectExtras(p);
   $("#project-title").textContent = p.title;
-  $("#project-description").textContent = p.detail;
-  $("#project-role").textContent = p.role;
+  $("#project-description").textContent = [p.summary,p.description].filter(Boolean).join("\n\n");
+  $("#project-role").textContent = p.role || "—";
   $("#project-formats").textContent = p.formats;
   projectDialog.showModal();
 }
@@ -304,10 +268,11 @@ function showPreview(button, x, y) {
   )
     return;
   const p = projects.find((p) => p.id === button.dataset.project);
+  if (!p?.image) return;
   if (previewProject !== p.id) {
     preview.innerHTML =
       visual(p) +
-      `<div class="preview-caption">${escape(p.type)} · placeholder</div>`;
+      `<div class="preview-caption">${escape(p.type)} · ${p.year}</div>`;
     previewProject = p.id;
   }
   preview.hidden = false;
@@ -366,9 +331,7 @@ const sections = [
   ["top", "Home"],
   ["socials", "Socials"],
   ["work", "Work"],
-  ["playground", "Playground"],
   ["about", "About"],
-  ["bookmarks", "Bookmarks"],
   ["footer", "A little reminder"],
 ];
 $("#section-rail").innerHTML = sections

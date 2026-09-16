@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {moonPose, motionConfig as c} from '../dist/motion.js';
+import {moonPose, motionConfig as c} from '../public/motion.js';
 const period=c.stance+c.flight;
 const near=(actual,expected,tolerance=1e-7)=>assert.ok(Math.abs(actual-expected)<tolerance,`${actual} differs from ${expected}`);
 test('every sampled foot position stays on or outside the moon',()=>{

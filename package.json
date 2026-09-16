@@ -1,24 +1,30 @@
 {
   "name": "bernardo-portfolio",
-  "version": "1.0.0",
-  "description": "A nature-and-space pixel portfolio with a reversible theme portal.",
-  "type": "module",
+  "version": "2.0.0",
   "private": true,
+  "type": "module",
   "license": "MIT",
   "engines": {
     "node": ">=22"
   },
   "scripts": {
-    "dev": "node scripts/serve.mjs",
-    "start": "node scripts/serve.mjs",
+    "build": "node scripts/build.mjs",
+    "dev": "node scripts/dev.mjs",
     "check": "node scripts/check.mjs",
-    "test": "node --test tests/*.test.mjs"
+    "test": "npm run build && node --test tests/*.test.mjs",
+    "db:generate": "drizzle-kit generate"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/bernardopmusiello-droid/bernardo-portfolio.git"
+  "devDependencies": {
+    "drizzle-kit": "0.31.10",
+    "drizzle-orm": "0.45.2",
+    "esbuild": "0.28.2",
+    "miniflare": "4.20260730.0"
   },
-  "bugs": {
-    "url": "https://github.com/bernardopmusiello-droid/bernardo-portfolio/issues"
+  "overrides": {
+    "miniflare": {
+      "undici": "7.29.0",
+      "sharp": "0.35.4"
+    },
+    "esbuild": "$esbuild"
   }
 }

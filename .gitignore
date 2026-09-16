@@ -11,3 +11,9 @@ coverage/
 *.tar.gz
 *.pem
 *.key
+
+# Generated server output and private content
+dist/
+.local-state/
+.sites-runtime/
+!.env.example

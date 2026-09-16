@@ -4,7 +4,8 @@ Thanks for taking a look. This is a small, dependency-free personal portfolio.
 
 1. Open an issue for a substantial change so its direction can be discussed. Small bug fixes can go straight to a pull request.
 2. Fork the repository and create a branch for one focused change.
-3. Run `npm run dev`, then make changes in `dist/`.
+3. Run `npm ci
+npm run dev`, then make changes in `public/`.
 4. Run `npm run check` and `npm test` with Node.js 22 or newer.
 5. For visible changes, check both themes, a narrow phone viewport, keyboard use, reduced motion and the footer pause control. Include before/after screenshots when useful.
 6. Explain the problem, your change and how you checked it in the pull request.

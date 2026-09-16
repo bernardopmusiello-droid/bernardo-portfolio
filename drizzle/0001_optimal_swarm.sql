@@ -1,0 +1,1 @@
+ALTER TABLE `upload_parts` ADD `checksum` text DEFAULT '' NOT NULL;

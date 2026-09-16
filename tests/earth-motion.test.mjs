@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { hikerPose, surfaceRadius, earthConfig } from "../dist/earth-motion.js";
-import { hikerAnchors } from "../dist/earth-profile.js";
+import { hikerPose, surfaceRadius, earthConfig } from "../public/earth-motion.js";
+import { hikerAnchors } from "../public/earth-profile.js";
 
 test("the supporting boot follows the illustrated terrain over two full Earth turns", () => {
   for (let i = 0; i <= 12800; i++) {
