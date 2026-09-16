@@ -92,3 +92,14 @@ test('YouTube-only projects save, publish, keep edits private, and reject unsupp
   assert.equal((await req(`/api/admin/projects/${p.id}`,{method:'PUT',body:{...p,youtubeUrl:'https://youtube.com.evil.test/watch?v=M7lc1UVf-VE'}})).status,400);
   const page=await req('/admin');assert.match(page.headers.get('content-security-policy'),/frame-src https:\/\/www.youtube-nocookie.com;/);
 });
+test('a video with a story and no short introduction can be published',async()=>{
+  let p=await create({title:'A finished film',kind:'Video',year:2025,summary:'',description:'A short film about the effort behind success.',role:'Editor, Filmer, Producer',url:'',youtubeUrl:'https://youtu.be/M7lc1UVf-VE'});
+  assert.equal((await ok('/api/projects',{auth:false})).projects.some(item=>item.id===p.id),false);
+  p=await ok(`/api/admin/projects/${p.id}/publish`,{method:'POST',body:{version:p.version,rightsConfirmed:true}});
+  const published=(await ok('/api/projects',{auth:false})).projects.find(item=>item.id===p.id);
+  assert.equal(published.title,'A finished film');
+  assert.equal(published.summary,'');
+  assert.equal(published.description,'A short film about the effort behind success.');
+  assert.equal(published.role,'Editor, Filmer, Producer');
+  assert.equal(published.youtubeUrl,'https://www.youtube.com/watch?v=M7lc1UVf-VE');
+});
