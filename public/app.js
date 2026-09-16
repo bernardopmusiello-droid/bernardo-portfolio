@@ -1,4 +1,5 @@
-import { projects, projectsUnavailable, makeIntroduction } from "./projects.js?v=11";
+import {enableYouTubePlayers,stopProjectMedia} from './youtube.js';
+import { projects, projectsUnavailable, makeIntroduction } from "./projects.js?v=13";
 import { projectMedia, projectExtras } from "./work-view.js";
 import { initMoonScene } from "./motion.js";
 import { initCursorUniverse } from "./interactions.js?v=9";
@@ -147,7 +148,8 @@ function visual(p) {
   return `<div class="project-visual generated-preview"><img src="${escape(p.image)}" alt="${escape(p.imageAlt)}" width="1280" height="720" decoding="async" /></div>`;
 }
 const projectDialog = $("#project-dialog");
-projectDialog.addEventListener("close",()=>{for(const video of projectDialog.querySelectorAll("video"))video.pause();});
+enableYouTubePlayers(projectDialog);
+projectDialog.addEventListener("close",()=>stopProjectMedia(projectDialog));
 function openProject(id) {
   const p = projects.find((p) => p.id === id);
   if (!p) return;

@@ -1,3 +1,4 @@
+import {youtubeVideo,youtubeHelp} from '../public/youtube.js';
 export class HttpError extends Error { constructor(status,message){super(message);this.status=status;} }
 export const fail=(status,message)=>{throw new HttpError(status,message);};
 export const CHUNK_SIZE=8*1024*1024;
@@ -44,10 +45,11 @@ export function text(value,max,required=false){
 export function id(value){if(typeof value!=='string'||!/^[a-f0-9-]{36}$/.test(value))fail(400,'Invalid item.');return value;}
 export function safeUrl(value){value=text(value,2000);if(!value)return '';let u;try{u=new URL(value);}catch{fail(400,'Use a complete HTTPS website link.');}if(u.protocol!=='https:'||u.username||u.password)fail(400,'Use a complete HTTPS website link without login details.');return u.href;}
 export function projectInput(value){
+  const input=text(value.youtubeUrl,2000);const youtube=input?youtubeVideo(input):null;if(input&&!youtube)fail(400,youtubeHelp);
   const kind=text(value.kind,40);if(!['Website','Video','Broadcast graphic','Product','App','Other'].includes(kind))fail(400,'Choose a project category.');
   const year=Number(value.year);if(!Number.isInteger(year)||year<1900||year>2100)fail(400,'Use a valid project year.');
   const mediaIds=value.mediaIds??[];if(!Array.isArray(mediaIds)||mediaIds.length>30)fail(400,'Use up to 30 files in one project.');
-  return {title:text(value.title,100,true),kind,year,summary:text(value.summary,280),description:text(value.description,10000),role:text(value.role,300),url:safeUrl(value.url),credits:text(value.credits,2000),transcript:text(value.transcript,16000),imageAlt:text(value.imageAlt,300),coverId:value.coverId?id(value.coverId):'',videoId:value.videoId?id(value.videoId):'',captionsId:value.captionsId?id(value.captionsId):'',mediaIds:[...new Set(mediaIds.map(id))]};
+  return {title:text(value.title,100,true),kind,year,summary:text(value.summary,280),description:text(value.description,10000),role:text(value.role,300),url:safeUrl(value.url),youtubeUrl:youtube?.url||'',credits:text(value.credits,2000),transcript:text(value.transcript,16000),imageAlt:text(value.imageAlt,300),coverId:value.coverId?id(value.coverId):'',videoId:value.videoId?id(value.videoId):'',captionsId:value.captionsId?id(value.captionsId):'',mediaIds:[...new Set(mediaIds.map(id))]};
 }
 export function uploadInput(value){
   const filename=text(value.filename,180,true);const mime=text(value.mime,100);const type=FILE_TYPES[mime];
@@ -69,7 +71,7 @@ export function signature(data,mime){
 export function responseHeaders(response,{html=false}={}){
   const headers=new Headers(response.headers);headers.set('X-Content-Type-Options','nosniff');headers.set('Referrer-Policy','strict-origin-when-cross-origin');
   headers.set('Permissions-Policy','camera=(), microphone=(), geolocation=(), payment=()');
-  if(html)headers.set('Content-Security-Policy',"default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' blob: data:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'");
+  if(html)headers.set('Content-Security-Policy',"default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' blob: data:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; frame-src https://www.youtube-nocookie.com; object-src 'none'; base-uri 'none'; form-action 'self'");
   return new Response(response.body,{status:response.status,headers});
 }
 export const json=(data,status=200)=>new Response(JSON.stringify(data),{status,headers:{'Content-Type':'application/json; charset=utf-8','Cache-Control':'private, no-store'}});

@@ -48,7 +48,7 @@ export async function projectRoutes(request,env,path){
     if(body.rightsConfirmed!==true)fail(400,'Confirm you have permission to publish the work and all included media.');
     const p=await validateMedia(env,id,projectInput(JSON.parse(draft)));
     if(!p.summary)fail(400,'Add a short summary before publishing.');
-    if(!p.url&&!p.mediaIds.length)fail(400,'Add a website link or media before publishing.');
+    if(!p.url&&!p.youtubeUrl&&!p.mediaIds.length)fail(400,'Add a website link, YouTube video, or media before publishing.');
     published=JSON.stringify({...p,publishedAt:now()});
   }else if(action==='unpublish'){published=null;}
   else if(action==='trash'){deleted=now();published=null;}
