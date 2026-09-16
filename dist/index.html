@@ -11,7 +11,7 @@
     <title>Bernardo Musiello — A Little Corner of the Universe</title>
     <link rel="icon" href="assets/favicon.svg" />
     <link rel="stylesheet" href="fonts.css" />
-    <link rel="stylesheet" href="styles.css?v=7" />
+    <link rel="stylesheet" href="styles.css?v=9" />
   </head>
   <body>
     <a class="skip-link" href="#work">Skip to work</a>
@@ -56,13 +56,17 @@
       />
     </div>
     <div class="nature-art day-only" aria-hidden="true">
-      <img class="nature-cloud cloud-one" src="assets/cloud-home.png" alt="" width="768" height="384" />
       <img class="nature-detail butterflies-one" src="assets/butterflies.png" alt="" width="512" height="512" />
       <img class="nature-forest forest-one" src="assets/alpine-lake.png" alt="" width="768" height="768" />
       <img class="nature-detail fern-one" src="assets/fern.png" alt="" width="512" height="512" />
       <img class="nature-forest forest-two" src="assets/waterfall.png" alt="" width="768" height="768" />
       <img class="nature-detail meadow-one" src="assets/meadow.png" alt="" width="768" height="512" />
       <img class="nature-forest forest-three" src="assets/forest-home.png" alt="" width="768" height="768" />
+    </div>
+    <div class="rain-clouds day-only">
+      <button class="rain-cloud cloud-one" data-rain-cloud="sky" type="button" aria-label="Start rain from the sky cloud" aria-pressed="false">
+        <img src="assets/cloud-home.png" alt="" width="768" height="384" />
+      </button>
     </div>
     <div class="frame-gutter left" aria-hidden="true"></div>
     <div class="frame-gutter right" aria-hidden="true"></div>
@@ -252,8 +256,10 @@
               <div id="astronaut" class="astronaut"></div>
               <div id="foot-shadow" class="foot-shadow"></div>
             </div>
+            <button class="rain-cloud footer-cloud cloud-left day-only" data-rain-cloud="garden" type="button" aria-label="Start rain from the garden cloud" aria-pressed="false">
+              <img src="assets/cloud-home.png" alt="" width="768" height="384" />
+            </button>
             <div class="footer-nature-art day-only" aria-hidden="true">
-              <img class="footer-cloud cloud-left" src="assets/cloud-home.png" alt="" width="768" height="384" />
               <img class="footer-butterflies" src="assets/butterflies.png" alt="" width="512" height="512" />
               <img class="footer-forest grove-left" src="assets/meadow.png" alt="" width="768" height="512" />
               <img class="footer-forest grove-right" src="assets/fern.png" alt="" width="512" height="512" />
@@ -451,6 +457,6 @@
       ></div>
       <p class="search-help">↑ ↓ to explore <span>enter to open</span></p>
     </dialog>
-    <script type="module" src="app.js?v=8"></script>
+    <script type="module" src="app.js?v=9"></script>
   </body>
 </html>

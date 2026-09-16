@@ -11,7 +11,7 @@ export function initCursorUniverse({ isPaused }) {
   const pointer = { x: 0, y: 0, active: false };
   const particles = [];
   const bodies = [...document.querySelectorAll(
-    ".galaxy, .space-object, .footer-space-art img, .moon-scene, .earth-scene, .nature-art img, .footer-nature-art img, .earth img, .bit, .sky i, .landscape-stars span",
+    ".galaxy, .space-object, .footer-space-art img, .moon-scene, .earth-scene, .nature-art img, .footer-nature-art img, .rain-cloud img, .earth img, .bit, .sky i, .landscape-stars span",
   )].map((el) => {
     const star = el.matches(".sky i, .landscape-stars span");
     const moon = el.matches(".moon-scene, .earth-scene");

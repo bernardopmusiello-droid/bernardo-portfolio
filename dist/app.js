@@ -1,8 +1,9 @@
 import { projects, makeIntroduction } from "./projects.js?v=8";
 import { initMoonScene } from "./motion.js";
-import { initCursorUniverse } from "./interactions.js?v=6";
+import { initCursorUniverse } from "./interactions.js?v=9";
 import { initEarthScene } from "./earth-motion.js?v=6";
 import { initThemePortal } from "./theme-portal.js?v=7";
+import { initCloudRain } from "./rain.js?v=9";
 const $ = (selector) => document.querySelector(selector);
 const preview = $("#hover-preview");
 let previewProject = null;
@@ -266,6 +267,9 @@ const earthScene = initEarthScene({
   isPaused: () => transitionBusy || paused() || document.documentElement.dataset.theme !== "light",
 });
 const cursorUniverse = initCursorUniverse({ isPaused: () => transitionBusy || paused() });
+const cloudRain = initCloudRain({
+  isPaused: paused, isQuiet: () => reduced.matches, isTransitioning: () => transitionBusy,
+});
 function syncMotion() {
   document.body.classList.toggle("motion-paused", paused());
   document.body.classList.toggle("motion-enabled", !paused());
@@ -283,6 +287,7 @@ function syncMotion() {
   moon.sync();
   earthScene.sync();
   cursorUniverse.sync();
+  cloudRain.sync();
   if (paused()) hidePreview();
 }
 $("#motion-toggle").addEventListener("click", () => {

@@ -2152,3 +2152,25 @@ dialog::backdrop {
 @media (max-width: 767px) {
   .theme-invitation { right: 32px; top: 39px; font-size: 13px; }
 }
+
+/* Clickable clouds sit outside decorative aria-hidden layers. Only their images
+   move with the cursor, leaving the click/tap targets steady. */
+.rain-clouds {
+  position: absolute; inset: 0; z-index: 3; overflow: hidden; pointer-events: none;
+  clip-path: inset(0 calc(50% + 375px) 0 0);
+}
+.rain-cloud {
+  position: absolute; padding: 0; border: 0; border-radius: 35%;
+  min-height: 44px; background: transparent; cursor: pointer;
+  pointer-events: auto; touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+}
+.rain-cloud img { display: block; width: 100%; height: auto; image-rendering: pixelated; pointer-events: none; user-select: none; }
+.rain-cloud:focus-visible { outline: 2px dashed var(--accent); outline-offset: 3px; }
+.rain-cloud img.cursor-body { filter: brightness(calc(1 + var(--cursor-glow, 0) * 0.08)); }
+.rain-cloud[aria-pressed="true"] img { filter: brightness(.89) saturate(.78); }
+.rain-cloud.footer-cloud { z-index: 3; }
+.cloud-rain { position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: 5; pointer-events: none; }
+@media (max-width: 767px) {
+  .rain-clouds { clip-path: inset(0 calc(100% - 176px) calc(100% - 82px) 0); }
+  .rain-cloud.cloud-one { left: 62px; right: auto; top: 4px; width: 106px; opacity: .85; }
+}
