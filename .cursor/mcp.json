@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "inspo": {
+      "url": "https://inspomcp.dev/api/mcp"
+    },
+    "awwwards": {
+      "command": "npx",
+      "args": ["-y", "awwwards-mcp"]
+    }
+  }
+}
